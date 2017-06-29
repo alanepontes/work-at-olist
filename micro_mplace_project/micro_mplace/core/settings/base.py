@@ -17,7 +17,9 @@ DEFAULT_APPS = [
 
 
 LOCAL_APPS = [
-
+    'apps.commons',
+    'apps.channels',
+    'apps.categories'
 ]
 
 THIRD_PARTY_APPS = []
