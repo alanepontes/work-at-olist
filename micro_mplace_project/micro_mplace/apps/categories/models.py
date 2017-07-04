@@ -13,18 +13,13 @@ from ..channels.models import Channel
 
 
 class Category(AbstractMetaModel):
-    name = models.CharField(max_length=60, unique=True)
+    name = models.CharField(max_length=60)
     channel = models.ForeignKey(Channel)
     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
    
     objects = models.Manager()
     only_parents_categories = ParentsCategoryManager()
     only_childs_categories = ChildsCategoryManager()
-
-    def add_subcategories(self, name_subcategory):
-        subcategory, created = Category.objects.get_or_create(name=name_subcategory, channel=self.channel)
-        if created:
-            subcategory.parent = self.parent 
 
     def subcategories(self, only_child=False):
         if only_child:
